@@ -680,50 +680,37 @@ URL:https://www.linkedin.com/in/rgnickelson/`;
         }
 
         function shareCard(person) {
-            let shareText = '';
+            // UPDATE THESE URLs after you deploy the page
+            const nareshURL = 'https://nebulaedge.ai/team#naresh';  // Change this to your actual deployed URL
+            const richardURL = 'https://nebulaedge.ai/team#richard';  // Change this to your actual deployed URL
             
-            if (person === 'naresh') {
-                shareText = `Connect with Naresh Hanchate
-Founder, COO, CTO
-Leading Innovation in AI & Technology
+            const pageURL = person === 'naresh' ? nareshURL : richardURL;
+            const name = person === 'naresh' ? 'Naresh Hanchate' : 'Richard Nickelson';
+            const title = person === 'naresh' ? 'Founder, COO, CTO' : 'CRO | Head of Growth & Partnerships';
+            
+            const shareText = `Connect with ${name}
+${title}
 
-📞 (+1) 714-603-4609
-📧 Naresh@NebulaEdge.ai
-
-🌐 Nebula Edge: https://nebulaedge.ai
-🌐 Get Edu Connect AI: https://geteduconnect.ai
-💼 LinkedIn: https://www.linkedin.com/in/nareshh/`;
-            } else {
-                shareText = `Connect with Richard Nickelson
-CRO | Head of Growth & Partnerships
-Empowering Businesses with Innovative Solutions
-
-📞 (+1) 949-709-9449
-✉️ Richard.Nickelson@Nebulaedge.ai
-
-🌐 Nebula Edge: https://nebulaedge.ai
-🔗 Get Edu Connect AI: https://geteduconnect.ai
-💼 LinkedIn: https://www.linkedin.com/in/rgnickelson/`;
-            }
+Digital Business Card: ${pageURL}`;
             
             if (navigator.share) {
                 navigator.share({
-                    title: person === 'naresh' ? 'Naresh Hanchate - Contact Info' : 'Richard Nickelson - Contact Info',
+                    title: `${name} - Contact Info`,
                     text: shareText,
-                    url: window.location.href
+                    url: pageURL
                 }).catch(() => {
-                    copyToClipboard(shareText);
+                    copyToClipboard(pageURL);
                 });
             } else {
-                copyToClipboard(shareText);
+                copyToClipboard(pageURL);
             }
         }
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('✅ Contact information copied to clipboard!');
+                alert('✅ Link copied to clipboard!');
             }).catch(() => {
-                alert('Please manually copy the contact information');
+                alert('Link: ' + text);
             });
         }
     </script>
